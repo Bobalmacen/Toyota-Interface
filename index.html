@@ -108,7 +108,7 @@
             background-color: #FFFFFF;
             transition: background-color 0.3s;
             padding: 1rem; /* Added padding */
-            max-height: 70vh; /* Limit height for better screen distribution */
+            /* REMOVED: max-height: 70vh; to allow the car image to grow */
         }
         body.dark-mode #car-display-container {
             background-color: #0d0d0d;
@@ -162,7 +162,7 @@
                     <img 
                         src="toyotalogo.png" 
                         alt="Car Brand Logo" 
-                        class="w-32 h-16 object-contain"
+                        class="w-40 h-20 object-contain"
                         onerror="this.onerror=null;this.src='https://placehold.co/128x64/CCCCCC/333333?text=Logo';"
                     >
                 </div>
@@ -180,7 +180,7 @@
                     <p class="text-gray-700 text-xs mt-2">Make sure that file is in the same folder as this HTML file and the name is spelled exactly the same!</p>
                 </div>
                 
-                </div>
+            </div>
             
             <div class="absolute top-4 right-4 flex flex-col items-end space-y-2">
                 
@@ -248,10 +248,10 @@
         let currentMode = 'DRIVE'; 
         
         const carVideos = {
-            'MANUAL': "MANUAL.png",
-            'DRIVE': "DRIVE.png", 
-            'REVERSE': "REVERSE.png",
-            'PARK': "PARK.png"
+            'MANUAL': "manual.png",
+            'DRIVE': "drive.png", 
+            'REVERSE': "reverse.png",
+            'PARK': "park.png"
         };
         
         // --- WEATHER STATE & LOGIC ---
@@ -498,6 +498,12 @@
         
         msgCloseButton.addEventListener('click', hideMessageBox);
         themeToggleButton.addEventListener('click', toggleTheme); 
+
+        // FIX: Disable double-click zoom on the entire body
+        document.body.addEventListener('dblclick', function(event) {
+            // Prevents the default action, which is often zooming on mobile/tablet or text selection.
+            event.preventDefault(); 
+        });
 
         // Initial State Setup
         document.addEventListener('DOMContentLoaded', loadInitialState);
